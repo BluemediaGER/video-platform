@@ -10,7 +10,7 @@ const routes = [
   {
     path: "/watch",
     name: "watch",
-    component: import("@/views/Watch"),
+    component: () => import("../views/Watch.vue"),
   },
 ];
 
