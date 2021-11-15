@@ -1,4 +1,4 @@
-# video-plattform
+# video-platform
 
 ## Project setup
 ```
