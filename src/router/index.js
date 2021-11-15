@@ -1,6 +1,5 @@
-import { createRouter, createWebHashHistory } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
-import Watch from "../views/Watch.vue";
 
 const routes = [
   {
@@ -11,12 +10,12 @@ const routes = [
   {
     path: "/watch",
     name: "watch",
-    component: Watch,
+    component: import("@/views/Watch"),
   },
 ];
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes,
 });
 
