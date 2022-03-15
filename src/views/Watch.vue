@@ -1,7 +1,12 @@
 <template>
   <div class="watch">
     <Loader v-if="loading" />
-    <Player class="player" :id="this.$route.query.v" v-if="!loading" />
+    <Player
+      class="player"
+      :id="this.$route.query.v"
+      :video="this.video"
+      v-if="!loading"
+    />
     <div v-if="!loading" class="video-info">
       <div class="video-info-title">
         <h1>{{ video.title }}</h1>

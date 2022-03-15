@@ -13,6 +13,10 @@ export default {
       type: String,
       required: true,
     },
+    video: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -22,7 +26,7 @@ export default {
   methods: {
     createPlayer() {
       this.player = new Clappr.Player({
-        source: axios.defaults.baseURL + "/" + this.id + "/index.m3u8",
+        source: axios.defaults.baseURL + "/" + this.id + "/" + this.video.src,
         parentId: "#player",
         autoPlay: true,
         height: "100%",

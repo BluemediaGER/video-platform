@@ -34,7 +34,7 @@ export default {
   methods: {
     getCategories() {
       axios
-        .get("/index.json")
+        .get("/index.json", { baseURL: "" })
         .then((response) => {
           this.categories = response.data;
           this.loading = false;
