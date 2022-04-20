@@ -1,19 +1,21 @@
 <template>
   <div class="home">
     <Loader v-if="$data.loading" />
-    <div v-if="!$data.loading" class="categories">
+    <div v-if="!$data.loading && !$data.empty" class="categories">
       <Category
         v-for="category in $data.categories"
         :category="category"
         :key="category.categoryId"
       />
     </div>
+    <Empty v-if="$data.empty" />
   </div>
 </template>
 
 <script>
 import Loader from "@/components/Loader.vue";
 import Category from "@/components/Category.vue";
+import Empty from "@/components/Empty.vue";
 import axios from "axios";
 
 export default {
@@ -21,11 +23,13 @@ export default {
   components: {
     Loader,
     Category,
+    Empty,
   },
   data() {
     return {
       categories: [],
       loading: true,
+      empty: false,
     };
   },
   created() {
@@ -36,11 +40,20 @@ export default {
       axios
         .get("/index.json", { baseURL: "" })
         .then((response) => {
-          this.categories = response.data;
+          if (response.data.length > 0) {
+            this.categories = response.data;
+          } else {
+            this.empty = true;
+          }
           this.loading = false;
         })
         .catch((error) => {
-          console.log(error);
+          if (error.response.status === 404) {
+            this.empty = true;
+            this.loading = false;
+          } else {
+            console.log(error);
+          }
         });
     },
   },
